@@ -49,7 +49,10 @@ In this practice, we are using mysql.connector to create a connection to a publi
 '''
 load_dotenv()
 
-start_time = time.time() 
+start_time = datetime.now()
+start_datetime = time.time() 
+print(f"Process started at: {start_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
+
 
 try:
     connection = mysql.connector.connect(
@@ -97,10 +100,12 @@ try:
             connection.commit()
             total_inserted += len(batch)
             
-        end_time = time.time()
-        total_time = end_time - start_time
+        end_datetime = time.time()
+        end_datetime = datetime.now()
+        total_time = end_datetime - start_datetime
 
         print(f"{total_inserted} records inserted successfully into the table")
+        print(f"Process ended at: {end_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total time taken: {total_time:.2f} seconds")
 
 except Error as e:
